@@ -56,8 +56,24 @@ public class PersonDAO {
     }
 
     public Person show(int id) {
-        //return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
-        return null;
+        Person person = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person WHERE id=?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+
+            person = new Person();
+
+            person.setId(resultSet.getInt("id"));
+            person.setName(resultSet.getString("name"));
+            person.setAge(resultSet.getInt("age"));
+            person.setEmail(resultSet.getString("email"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return person;
     }
 
     public void save(Person person) {
@@ -74,13 +90,25 @@ public class PersonDAO {
     }
 
     public void update(Person updatePerson, int id) {
-        Person toBeUpdated = show(id);
-        toBeUpdated.setName(updatePerson.getName());
-        toBeUpdated.setAge(updatePerson.getAge());
-        toBeUpdated.setEmail(updatePerson.getEmail());
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE Person SET name=?, age=?, email=? WHERE id=?");
+            statement.setString(1, updatePerson.getName());
+            statement.setInt(2, updatePerson.getAge());
+            statement.setString(3, updatePerson.getEmail());
+            statement.setInt(4, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void delete(int id) {
-//        people.removeIf(p -> p.getId() == id);
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM Person WHERE id=?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
