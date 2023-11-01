@@ -2,7 +2,6 @@ package crud.spring.controllers;
 
 import crud.spring.dao.PersonDAO;
 import crud.spring.models.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +33,20 @@ public class PeopleController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute("person") Person person){
+    public String create(@ModelAttribute("person") Person person) {
         personDAO.save(person);
+        return "redirect:/people";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("person", personDAO.show(id));
+        return "people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id){
+        personDAO.update(person, id);
         return "redirect:/people";
     }
 }
