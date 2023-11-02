@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appoint an administrator</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/admin/add}">
+    <label for="person">Appoint an administrator:</label>
+    <select th:object="${person}" th:field="*{id}" id="person">
+        <option th:each="person:${people}" th:value="${person.getId()}" th:text="${person.getName()}"></option>
+    </select>
+    <input style="color: darkred" type="submit" value="Appoint"/>
+
+</form>
+</body>
+</html>

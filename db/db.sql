@@ -26,12 +26,10 @@ insert into person(name, age, email) VALUES ('Sonya', 15, 'Cathc@mail.ru');
 insert into person(name, age, email) VALUES ('Marya', 39, 'Sotki@gmail.ru');
 insert into person(name, age, email) VALUES ('Med', 15, 'soroka@mail.ru');
 
-insert into person
-values (2, 'Sonya', 15, 'Cathc@mail.ru');
-insert into person
-values (3, 'Marya', 39, 'Sotki@gmail.ru');
-insert into person
-values (4, 'Ted', 44, 'School@mail.ru');
+insert into person(name, age, email,address) VALUES ('Ted', 44, 'School@mail.ru', 'Russia, Moscow, 126555');
+insert into person(name, age, email,address) VALUES ('Sonya', 15, 'Cathc@mail.ru','Russia, Astrachan, 414040');
+insert into person(name, age, email,address) VALUES ('Marya', 39, 'Sotki@gmail.ru','Russia, Spb, 017454');
+insert into person(name, age, email,address) VALUES ('Med', 15, 'soroka@mail.ru','Russia, Krasnodar, 698771');
 
 select *
 from Person;
