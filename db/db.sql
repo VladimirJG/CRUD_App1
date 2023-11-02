@@ -42,3 +42,7 @@ create sequence my_sequence;
 
 select nextval('my_sequence');
 drop sequence my_sequence;
+
+truncate table person;
+
+alter table person add column address varchar not null;
